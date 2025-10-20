@@ -1,7 +1,7 @@
 services:
   - type: web
     name: ecom-backend
-    env: java
+    env: Docker
     plan: free
     branch: main
     buildCommand: ./mvnw clean package -DskipTests
