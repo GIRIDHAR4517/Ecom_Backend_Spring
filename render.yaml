@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: ecom-backend
+    env: java
+    plan: free
+    branch: main
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/Ecom-0.0.1-SNAPSHOT.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://${db.HOST}:${db.PORT}/${db.DATABASE}
+      - key: SPRING_DATASOURCE_USERNAME
+        value: ${db.USER}
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: ${db.PASSWORD}
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: JAVA_VERSION
+        value: 21
+
+databases:
+  - name: ecom-db
+    plan: free
+    ipAllowList: []
