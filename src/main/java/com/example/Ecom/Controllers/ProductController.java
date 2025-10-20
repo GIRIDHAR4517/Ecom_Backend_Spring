@@ -41,8 +41,16 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public void addProduct(@RequestBody Product product){
-        System.out.println(product);
-        service.addProduct(product);
+    public ResponseEntity<Product> addProduct(@RequestBody Product product){
+        return new ResponseEntity<>(service.addProduct(product) , HttpStatus.OK);
+
+    }
+
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable int id){
+       if( service.deleteProduct(id))
+        return new ResponseEntity<>(HttpStatus.OK);
+       else
+           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

@@ -25,7 +25,16 @@ public class ProductService {
        return repo.findById(id).orElse(null);
     }
 
-    public  void addProduct(Product product){
-       repo.save(product);
+    public  Product addProduct(Product product){
+        return repo.save(product);
+    }
+
+    public boolean deleteProduct(int id) {
+       Product pro = repo.findById(id).orElse(null);
+       if(pro !=null){
+           repo.deleteById(id);
+           return true;
+       }
+       return false;
     }
 }
